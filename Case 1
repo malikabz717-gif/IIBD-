@@ -1,0 +1,27 @@
+# Кейс-задача № 1
+# Дан одномерный массив A размерности N.
+# Найти сумму отрицательных элементов, расположенных между максимальным и минимальным.
+
+def sum_negative_between_min_max(arr):
+    max_index = arr.index(max(arr))  # индекс первого максимального элемента
+    min_index = arr.index(min(arr))  # индекс первого минимального элемента
+
+    left = min(max_index, min_index)
+    right = max(max_index, min_index)
+
+    negative_sum = 0
+    for i in range(left + 1, right):
+        if arr[i] < 0:
+            negative_sum += arr[i]
+
+    return negative_sum
+
+
+n = int(input("Введите количество элементов массива N: "))
+a = list(map(int, input("Введите элементы массива через пробел: ").split()))
+
+if len(a) != n:
+    print("Ошибка: количество введённых элементов не совпадает с N.")
+else:
+    result = sum_negative_between_min_max(a)
+    print("Сумма отрицательных элементов между максимальным и минимальным:", result)
