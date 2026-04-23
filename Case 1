@@ -2,26 +2,44 @@
 # Дан одномерный массив A размерности N.
 # Найти сумму отрицательных элементов, расположенных между максимальным и минимальным.
 
-def sum_negative_between_min_max(arr):
-    max_index = arr.index(max(arr))  # индекс первого максимального элемента
-    min_index = arr.index(min(arr))  # индекс первого минимального элемента
+#include <iostream>
+#include <vector>
+using namespace std;
 
-    left = min(max_index, min_index)
-    right = max(max_index, min_index)
+int main() {
+    int N;
+    cout << "Введите количество элементов массива N: ";
+    cin >> N;
 
-    negative_sum = 0
-    for i in range(left + 1, right):
-        if arr[i] < 0:
-            negative_sum += arr[i]
+    vector<int> A(N);
+    cout << "Введите элементы массива: ";
+    for (int i = 0; i < N; i++) {
+        cin >> A[i];
+    }
 
-    return negative_sum
+    int maxIndex = 0;
+    int minIndex = 0;
 
+    for (int i = 1; i < N; i++) {
+        if (A[i] > A[maxIndex]) {
+            maxIndex = i;
+        }
+        if (A[i] < A[minIndex]) {
+            minIndex = i;
+        }
+    }
 
-n = int(input("Введите количество элементов массива N: "))
-a = list(map(int, input("Введите элементы массива через пробел: ").split()))
+    int left = min(maxIndex, minIndex);
+    int right = max(maxIndex, minIndex);
 
-if len(a) != n:
-    print("Ошибка: количество введённых элементов не совпадает с N.")
-else:
-    result = sum_negative_between_min_max(a)
-    print("Сумма отрицательных элементов между максимальным и минимальным:", result)
+    int sum = 0;
+    for (int i = left + 1; i < right; i++) {
+        if (A[i] < 0) {
+            sum += A[i];
+        }
+    }
+
+    cout << "Сумма отрицательных элементов между максимальным и минимальным: " << sum << endl;
+
+    return 0;
+}
