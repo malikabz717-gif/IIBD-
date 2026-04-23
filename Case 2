@@ -1,0 +1,68 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+// Базовый класс
+class AIModel {
+protected:
+    string name;
+
+public:
+    AIModel(string modelName) {
+        name = modelName;
+    }
+
+    void showName() const {
+        cout << "Название модели: " << name << endl;
+    }
+
+    virtual void train() const {
+        cout << "Базовая модель обучается на данных." << endl;
+    }
+
+    virtual ~AIModel() {}
+};
+
+// Производный класс
+class NeuralNetwork : public AIModel {
+private:
+    int layers;
+
+public:
+    NeuralNetwork(string modelName, int layerCount) : AIModel(modelName) {
+        layers = layerCount;
+    }
+
+    void train() const override {
+        cout << "Нейронная сеть \"" << name << "\" обучается с " << layers << " слоями." << endl;
+    }
+
+    void predict() const {
+        cout << "Нейронная сеть выполняет прогнозирование." << endl;
+    }
+};
+
+int main() {
+    setlocale(LC_ALL, "Russian");
+
+    AIModel baseModel("Базовая AI-модель");
+    NeuralNetwork derivedModel("Neural Network", 5);
+
+    cout << "Работа методов базового класса:" << endl;
+    baseModel.showName();
+    baseModel.train();
+
+    cout << endl;
+    cout << "Работа методов производного класса:" << endl;
+    derivedModel.showName();   // метод базового класса
+    derivedModel.train();      // переопределенный метод
+    derivedModel.predict();    // собственный метод производного класса
+
+    cout << endl;
+    cout << "Демонстрация полиморфизма:" << endl;
+    AIModel* modelPtr = &derivedModel;
+    modelPtr->showName();
+    modelPtr->train();
+
+    return 0;
+}
