@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <clocale>
 using namespace std;
 
 // Базовый класс
@@ -53,12 +54,14 @@ int main() {
     baseModel.train();
 
     cout << endl;
+
     cout << "Работа методов производного класса:" << endl;
-    derivedModel.showName();   // метод базового класса
-    derivedModel.train();      // переопределенный метод
-    derivedModel.predict();    // собственный метод производного класса
+    derivedModel.showName();
+    derivedModel.train();
+    derivedModel.predict();
 
     cout << endl;
+
     cout << "Демонстрация полиморфизма:" << endl;
     AIModel* modelPtr = &derivedModel;
     modelPtr->showName();
