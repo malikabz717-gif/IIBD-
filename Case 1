@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include <vector>
+#include <algorithm>
 using namespace std;
 
 int main() {
@@ -11,7 +12,13 @@ int main() {
     cout << "Введите количество элементов массива N: ";
     cin >> N;
 
+    if (N <= 0) {
+        cout << "Ошибка: количество элементов массива должно быть положительным." << endl;
+        return 0;
+    }
+
     vector<int> A(N);
+
     cout << "Введите элементы массива: ";
     for (int i = 0; i < N; i++) {
         cin >> A[i];
@@ -24,6 +31,7 @@ int main() {
         if (A[i] > A[maxIndex]) {
             maxIndex = i;
         }
+
         if (A[i] < A[minIndex]) {
             minIndex = i;
         }
@@ -33,6 +41,7 @@ int main() {
     int right = max(maxIndex, minIndex);
 
     int sum = 0;
+
     for (int i = left + 1; i < right; i++) {
         if (A[i] < 0) {
             sum += A[i];
